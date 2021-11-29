@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Todos</title>
+    <link
+      rel="stylesheet"
+      href="styles.css"
+    />
+  </head>
+  <body>
+    <h2>Todos</h2>
+    <ul id="todo_list"></ul>
+    <div class="overlay"></div>
+    <span class="confirmation-prompt"></span>
+    <span class="context-menu"></span>
+    <script>
+      const todo_items = [
+        { id: 1, title: "Homework" },
+        { id: 2, title: "Shopping" },
+        { id: 3, title: "Workout" },
+        { id: 4, title: "Coffee with John " },
+      ];
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const overlay = document.querySelector(".overlay");
+        const list = document.getElementById("todo_list");
+        const contextMenuElement = document.querySelector(".context-menu");
+
+        todo_items.forEach((item) => {
+          const listItemElement = document.createElement("li");
+          listItemElement.setAttribute("todo-id", item.id);
+          const text = document.createTextNode(item.title);
+          listItemElement.appendChild(text);
+          list.appendChild(listItemElement);
+
+          listItemElement.addEventListener("contextmenu", (event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            const elementToDelete = event.target;
+            const deleteTodoId = elementToDelete.getAttribute("todo-id");
+
+            if (contextMenuElement.children.length === 0) {
+              const ul = createContextMenuItems(deleteTodoId);
+              contextMenuElement.appendChild(ul);
+
+              const contextMenuOptionsArr = Array.from(
+                document.querySelector(".context-menu-list").children
+              );
+
+              contextMenuOptionsArr.forEach((listItem) => {
+                console.log("=> ", listItem);
+                const dataId = listItem.getAttribute("data-id");
+
+                if (dataId) {
+                  listItem.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                    contextMenuElement.style.display = "none";
+                    confirmationPromtElement.classList.remove("hide");
+                    confirmationPromtElement.classList.add("show");
+                    overlay.style.display = "block";
+                  });
+                }
+              });
+            }
+            confirmationPromtElement.setAttribute(
+              "elementId-to-delete",
+              deleteTodoId
+            );
+
+            contextMenuElement.style.display = "block";
+            contextMenuElement.style.position = "absolute";
+            contextMenuElement.style.top = `${event.clientY}px`;
+            contextMenuElement.style.left = `${event.clientX}px`;
+
+            contextMenuElement.classList.add("show");
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          contextMenuElement.style.display = "none";
+        });
+
+        const confirmationPromtElement = document.querySelector(
+          ".confirmation-prompt"
+        );
+        confirmationPromtElement.classList.add("hide");
+        confirmationPromtElement.textContent =
+          "Are you sure you want to delete this todo?";
+
+        const yesButton = document.createElement("a");
+        yesButton.textContent = "Yes";
+        yesButton.classList.add("prompt-btn");
+        yesButton.classList.add("yes");
+
+        const noButton = document.createElement("a");
+        noButton.textContent = "No";
+        noButton.classList.add("prompt-btn");
+        noButton.classList.add("no");
+
+        confirmationPromtElement.appendChild(yesButton);
+        confirmationPromtElement.appendChild(noButton);
+
+        list.appendChild(confirmationPromtElement);
+
+        yesButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+
+          const removeTodo = document.querySelector(
+            `[todo-id="${confirmationPromtElement.getAttribute(
+              "elementId-to-delete"
+            )}"]`
+          );
+          removeTodo.remove();
+          confirmationPromtElement.classList.remove("show");
+          confirmationPromtElement.classList.add("hide");
+          overlay.style.display = "none";
+        });
+
+        noButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+
+          confirmationPromtElement.classList.remove("show");
+          confirmationPromtElement.classList.add("hide");
+          overlay.style.display = "none";
+        });
+      });
+
+      const createContextMenuItems = (todoId) => {
+        const ulElement = document.createElement("ul");
+        ulElement.classList.add("context-menu-list");
+        // const liEdit = document.createElement("li");
+        // liEdit.textContent = "Edit Todo";
+
+        // const liShowDetails = document.createElement("li");
+        // liShowDetails.textContent = "Show Details";
+
+        const liDelete = document.createElement("li");
+        liDelete.textContent = "Delete Todo";
+        liDelete.setAttribute("data-id", todoId);
+
+        // ulElement.appendChild(liEdit);
+        // ulElement.appendChild(liShowDetails);
+        ulElement.appendChild(liDelete);
+
+        return ulElement;
+      };
+    </script>
+  </body>
+</html>

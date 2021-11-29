@@ -1,0 +1,150 @@
+body {
+  background: #8BCD50;
+  /* background: #D2FBA4; */
+}
+
+h2 {
+  color: white;
+  margin: 50px;
+}
+
+ul {
+  list-style: none;
+}
+
+#todo_list li {
+  width: 500px;
+  height: 30px;
+  background: #ECF87F;
+  color: #013A20;
+  font-size: 24px;
+  margin: 10px;
+  padding: 15px;
+  text-align: left;
+  border-radius: 5px;
+}
+
+li span {
+  float: right;
+  cursor: pointer;
+}
+
+.overlay {
+  display: none;
+  position: absolute;
+  z-index: 4;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.delete-todo-icon {
+  background: url('../img/icons8-delete-32.png');
+  width: 35px;
+  height: 35px;
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.delete-todo-icon:hover {
+  background: url('../img/icons8-delete-32-hover.png');
+}
+
+.confirmation-prompt {
+  display: block;
+  width: 400px;
+  height: 110px;
+  background: white;
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  border-radius: 3px;
+  padding: 50px 10px 0px;
+  font-size: 20px;
+  z-index: 5;
+}
+
+.hide {
+  /* opacity: 0; */
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.prompt-btn {
+  display: block;
+  position: absolute;
+  width: 80px;
+  height: 20px;
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+.yes {
+  background: #013A20;
+  top: 75%;
+  left: 50%;
+}
+.yes:hover {
+  background: #76B947;
+}
+
+.no {
+  background: #BA0F30;
+  top: 75%;
+  left: 75%;
+}
+
+.no:hover {
+  background: #F04854;
+}
+
+.context-menu {
+  display: none;
+  position: relative;
+  width: 200px;
+  background: #D7D4CC;
+  align-items: left;
+  border-radius: 5px;
+}
+
+.context-menu ul {
+  width: 100%;
+  margin: 0px;
+  position: relative;
+  top: 0px;
+  left: -40px;
+}
+
+.context-menu-list li {
+  background: #D7D4CC;
+  height: 30px;
+  color: black;
+  text-align: left;
+  list-style: none;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-top: 10px;
+  /* border-bottom: 1px solid #D7D4CC; */
+  border-radius: 5px;
+}
+
+.context-menu-list li:hover {
+  background: #C0C9CC;
+  color: white;
+  /* border-bottom: 1px solid white; */
+}
+
+
+/* 
+.context-menu-list li:last-child {
+  border-bottom: none;
+} */
