@@ -128,18 +128,9 @@
       const createContextMenuItems = (todoId) => {
         const ulElement = document.createElement("ul");
         ulElement.classList.add("context-menu-list");
-        // const liEdit = document.createElement("li");
-        // liEdit.textContent = "Edit Todo";
-
-        // const liShowDetails = document.createElement("li");
-        // liShowDetails.textContent = "Show Details";
-
         const liDelete = document.createElement("li");
         liDelete.textContent = "Delete Todo";
         liDelete.setAttribute("data-id", todoId);
-
-        // ulElement.appendChild(liEdit);
-        // ulElement.appendChild(liShowDetails);
         ulElement.appendChild(liDelete);
 
         return ulElement;
