@@ -10,4 +10,6 @@
 
 - Right click (Control+click on Mac) to delete a todo item via the context menu
 
+![context_menu](https://user-images.githubusercontent.com/41551585/165632890-37b6aa9a-b54d-47d3-a7ca-d01fb4f2469c.gif)
+
 Deployed [here](https://contextmenu-example.herokuapp.com/)
